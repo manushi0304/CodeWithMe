@@ -1,0 +1,92 @@
+--- Python Basics ---
+
+pycache/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+--- Virtual Environments ---
+
+Common names for virtual envs
+
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+.venv/
+
+--- Streamlit ---
+
+Ignore secrets (CRITICAL for security)
+
+.streamlit/secrets.toml
+.streamlit/credentials.toml
+
+Keep config.toml if you want to share theme settings, otherwise ignore:
+
+.streamlit/config.toml
+
+--- Hugging Face & AI Models ---
+
+Ignore large model weights downloaded locally
+
+*.bin
+*.safetensors
+*.pth
+*.pt
+*.h5
+*.ckpt
+*.gguf
+
+Ignore local Hugging Face cache if it was created in the project root
+
+.cache/
+huggingface/
+transformers_cache/
+
+--- Project Specific Data ---
+
+Ignore user data and generated reports
+
+user_data.json
+*.pdf
+*.md
+!README.md
+my_coding_adventure.md
+my_adventure.md
+
+--- Environment Variables ---
+
+.env
+.env.local
+
+--- IDE Settings ---
+
+.vscode/
+.idea/
+*.swp
+*.swo
+
+--- OS Specific ---
+
+.DS_Store
+Thumbs.db

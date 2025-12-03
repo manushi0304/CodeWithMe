@@ -1,0 +1,10 @@
+streamlit
+requests
+beautifulsoup4
+fpdf
+transformers
+scikit-learn
+email_validator
+python-dotenv
+torch
+accelerate
