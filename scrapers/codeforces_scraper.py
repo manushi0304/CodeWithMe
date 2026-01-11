@@ -1,40 +1,69 @@
 import requests
+from collections import defaultdict
 
 def fetch_codeforces_data(handle):
-    headers = {"User-Agent": "CodeMateAI/1.0"}
+    headers = {"User-Agent": "Mozilla/5.0"}
+
     try:
-        url = f"https://codeforces.com/api/user.info?handles={handle}"
-        res = requests.get(url, headers=headers, timeout=15)
-        res.raise_for_status()
-        data = res.json()
-        
-        if not data.get("result"):
-            return {}
-            
-        user_info = data["result"][0]
-        
-        # Get additional stats for solved problems
-        try:
-            stats_url = f"https://codeforces.com/api/user.status?handle={handle}&from=1&count=1000"
-            stats_res = requests.get(stats_url, headers=headers, timeout=10)
-            if stats_res.status_code == 200:
-                stats_data = stats_res.json()
-                solved_count = len(set(sub["problem"]["name"] for sub in stats_data.get("result", []) 
-                                    if sub.get("verdict") == "OK"))
-            else:
-                solved_count = 0
-        except:
-            solved_count = 0
-            
+        # --- USER INFO ---
+        info = requests.get(
+            f"https://codeforces.com/api/user.info?handles={handle}",
+            headers=headers,
+            timeout=10
+        ).json()
+
+        if info.get("status") != "OK":
+            return {"status": "error", "message": "User not found"}
+
+        user = info["result"][0]
+
+        # --- SUBMISSIONS ---
+        subs = requests.get(
+            f"https://codeforces.com/api/user.status?handle={handle}",
+            headers=headers,
+            timeout=10
+        ).json().get("result", [])
+
+        solved = {}
+        difficulty = {"easy": 0, "medium": 0, "hard": 0}
+        topics = defaultdict(int)
+
+        for s in subs:
+            if s.get("verdict") == "OK":
+                p = s["problem"]
+                key = (p["contestId"], p["index"])
+                if key in solved:
+                    continue
+                solved[key] = True
+
+                rating = p.get("rating", 0)
+                if rating <= 1200:
+                    difficulty["easy"] += 1
+                elif rating <= 1800:
+                    difficulty["medium"] += 1
+                else:
+                    difficulty["hard"] += 1
+
+                for tag in p.get("tags", []):
+                    topics[tag] += 1
+
         return {
-            "rating": user_info.get("rating", "N/A"),
-            "maxRating": user_info.get("maxRating", "N/A"),
-            "rank": user_info.get("rank", "N/A"),
-            "solved": solved_count  
+            "status": "success",
+            "platform": "codeforces",
+            "username": handle,
+            "general": {
+                "totalSolved": len(solved),
+                "easy": difficulty["easy"],
+                "medium": difficulty["medium"],
+                "hard": difficulty["hard"],
+                "rating": user.get("rating"),
+                "rank": user.get("rank"),
+                "stars": None,
+                "reputation": None
+            },
+            "topics": dict(sorted(topics.items(), key=lambda x: x[1], reverse=True)),
+            "metadata": {"source": "api", "confidence": "high"}
         }
-    except requests.exceptions.Timeout:
-        print("Codeforces request timed out")
-        return {}  
-    except (requests.exceptions.RequestException, Exception) as e:
-        print(f"Error fetching Codeforces data: {e}")
-        return {}
+
+    except Exception as e:
+        return {"status": "error", "message": str(e)}

@@ -1,29 +1,43 @@
 import requests
 from bs4 import BeautifulSoup
+from collections import defaultdict
 
 def fetch_hackerrank_data(username):
-    headers = {"User-Agent": "CodeMateAI/1.0"}
+    url = f"https://www.hackerrank.com/{username}"
+    headers = {"User-Agent": "Mozilla/5.0"}
+
     try:
-        url = f"https://www.hackerrank.com/{username}"
-        res = requests.get(url, headers=headers, timeout=15)
-        res.raise_for_status()
-        soup = BeautifulSoup(res.text, 'html.parser')
-        
-        badges = soup.find_all("div", class_="hacker-badge")
-        if not badges:
-            return {}
-        
-        domains = [badge.text.strip() for badge in badges]
-        # Estimate solved count based on badges (rough approximation)
-        solved_count = len(domains) * 10  
-            
+        soup = BeautifulSoup(
+            requests.get(url, headers=headers, timeout=15).text,
+            "html.parser"
+        )
+
+        solved_tag = soup.find("div", {"data-attr": "completed_challenges_count"})
+        total = int(solved_tag.text.strip()) if solved_tag else 0
+
+        stars = soup.text.count("★")
+
+        skills = defaultdict(int)
+        for s in soup.find_all("span", class_="skills-category-title"):
+            skills[s.text.strip()] += 1
+
         return {
-            "badges": domains,
-            "solved": solved_count  
+            "status": "success",
+            "platform": "hackerrank",
+            "username": username,
+            "general": {
+                "totalSolved": total,
+                "easy": None,
+                "medium": None,
+                "hard": None,
+                "rating": None,
+                "rank": None,
+                "stars": stars,
+                "reputation": None
+            },
+            "topics": dict(skills),
+            "metadata": {"source": "scraper", "confidence": "medium"}
         }
-    except requests.exceptions.Timeout:
-        print("HackerRank request timed out")
-        return {}  
-    except (requests.exceptions.RequestException, Exception) as e:
-        print(f"Error fetching Hackerrank data: {e}")
-        return {}
+
+    except Exception as e:
+        return {"status": "error", "message": str(e)}
