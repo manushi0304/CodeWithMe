@@ -3,7 +3,6 @@
 > Your intelligent companion for mastering data structures, algorithms, and coding interview preparation powered by AI.
 
 [![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
 ## 📋 Table of Contents
