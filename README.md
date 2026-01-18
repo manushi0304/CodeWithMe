@@ -1,9 +1,6 @@
 # 🚀 CodeWithMe - AI-Powered Coding Assistant Platform
 
-> Your intelligent companion for mastering data structures, algorithms, and coding interview preparation powered by AI.
-
-[![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)](CONTRIBUTING.md)
+> Your intelligent companion for mastering data structures, algorithms, and coding interview preparation powered by AI
 
 ## 📋 Table of Contents
 
@@ -312,38 +309,3 @@ We welcome contributions! Here's how you can help:
 
 ### Contribution Guidelines
 
-- Follow PEP 8 style guide for Python code
-- Add docstrings to all functions and classes
-- Include unit tests for new features
-- Update documentation as needed
-- Keep commits atomic and well-described
-
-
-## 🙏 Acknowledgments
-
-- Hugging Face
-- The open-source community
-
-## 🗺️ Roadmap
-
-- [ ] Add support for more programming languages
-- [ ] Integrate with GitHub for automatic code reviews
-- [ ] Mobile app development
-- [ ] Community features (leaderboards, challenges)
-- [ ] Advanced analytics dashboard
-- [ ] Chrome extension for LeetCode
-- [ ] VS Code plugin
-
-## ⭐ Star History
-
-If you find this project helpful, please consider giving it a star! ⭐
-
----
-
-<div align="center">
-
-**Built with ❤️ by developers, for developers**
-
-[Report Bug](https://github.com/manushi0304/CodeWithMe/issues) · [Request Feature](https://github.com/manushi0304/CodeWithMe/issues)
-
-</div>
