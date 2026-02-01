@@ -17,8 +17,8 @@ from coding_interview_simulator import simulate_interview
 from code_performance_benchmark import benchmark_code
 from codebase_analyzer import analyze_codebase
 
-st.set_page_config(page_title="CodeWithMe", layout="wide")
-st.title("CodeWithME")
+st.set_page_config(page_title="Eduvision", layout="wide")
+st.title("EduVision")
 
 tab1, tab2, tab3, tab4 = st.tabs(["Connect Handles", "Analyze & Roadmap", "AI Tools", "PDF & Email"])
 
@@ -33,11 +33,11 @@ with tab1:
 
     # Inputs
     lc = sanitize_username(st.text_input("LeetCode Username"))
-    cf = sanitize_username(st.text_input("Codeforces Handle"))
-    gfg = sanitize_username(st.text_input("GeeksforGeeks Username"))
-    cc = sanitize_username(st.text_input("CodeChef Username"))
-    at = sanitize_username(st.text_input("AtCoder Username"))
-    hr = sanitize_username(st.text_input("HackerRank Username"))
+    #cf = sanitize_username(st.text_input("Codeforces Handle"))
+    #gfg = sanitize_username(st.text_input("GeeksforGeeks Username"))
+    #cc = sanitize_username(st.text_input("CodeChef Username"))
+    #at = sanitize_username(st.text_input("AtCoder Username"))
+    #hr = sanitize_username(st.text_input("HackerRank Username"))
     
     st.markdown("**Note:** If you have a URL, paste it directly. Otherwise, just enter the username.")
 
@@ -346,4 +346,4 @@ with tab4:
             st.error("No user data found.")
     
     st.markdown("---")
-    st.caption("© 2025 CodeWithME| Manushi Bombaywala")
+    #st.caption("© 2025 CodeWithME| Manushi Bombaywala")
