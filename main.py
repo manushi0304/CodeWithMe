@@ -46,11 +46,11 @@ with tab1:
             # 1. Fetch Data
             user_stats = {
                 "leetcode": fetch_leetcode_data(lc) if lc else {},
-                "codeforces": fetch_codeforces_data(cf) if cf else {},
-                "gfg": fetch_gfg_data(gfg) if gfg else {},
-                "codechef": fetch_codechef_data(cc) if cc else {},
-                "atcoder": fetch_atcoder_data(at) if at else {},
-                "hackerrank": fetch_hackerrank_data(hr) if hr else {}
+               # "codeforces": fetch_codeforces_data(cf) if cf else {},
+                #"gfg": fetch_gfg_data(gfg) if gfg else {},
+                #"codechef": fetch_codechef_data(cc) if cc else {},
+                #"atcoder": fetch_atcoder_data(at) if at else {},
+                #"hackerrank": fetch_hackerrank_data(hr) if hr else {}
             }
             save_user_data(user_stats)
             
